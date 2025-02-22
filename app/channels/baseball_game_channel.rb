@@ -1,6 +1,6 @@
-class ScoreChannel < ApplicationCable::Channel
+class BaseballGameChannel < ApplicationCable::Channel
   def subscribed
-    stream_for "scoreboard"
+    stream_for "baseball_game"
   end
 
   def unsubscribed

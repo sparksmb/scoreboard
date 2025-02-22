@@ -11,13 +11,6 @@ Rails.application.routes.draw do
 
   root "baseball_games#scoreboard"
 
-  resources :games, only: [ :show, :edit, :update ]
-  get "games/show"
-  get "games/edit"
-  get "games/update"
-  get "games/scoreboard"
-
   resources :baseball_games, only: [ :show, :edit, :update ]
-  get "baseball_games/scoreboard"
   get "/scoreboard", to: "baseball_games#scoreboard"
 end

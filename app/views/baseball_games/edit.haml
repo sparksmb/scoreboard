@@ -1,6 +1,6 @@
 %h1 Edit Score
 
-= form_with(model: @game, local: true) do |f|
+= form_with(model: @game, url: baseball_game_path(@game), data: { turbo: false }) do |f|
   %p
     %label Home Score:
     = f.number_field :home_score

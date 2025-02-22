@@ -1,8 +1,9 @@
 import consumer from "channels/consumer"
 
-consumer.subscriptions.create("ScoreChannel", {
+consumer.subscriptions.create("BaseballGameChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
+    console.log("hooray connected...");
   },
 
   disconnected() {
