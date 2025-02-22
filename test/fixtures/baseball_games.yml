@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  home_team: MyString
+  home_mascot: MyString
+  home_bg_color: MyString
+  home_font_color: MyString
+  home_score: MyString
+  away_team: MyString
+  away_mascot: MyString
+  away_bg_color: MyString
+  away_font_color: MyString
+  away_score: MyString
+  inning: 1
+  inning_status: MyString
+  outs: 1
+  pitch_count: 1
+  foul_balls: 1
+  runner_on_first: false
+  runner_on_second: false
+  runner_on_third: false
+
+two:
+  home_team: MyString
+  home_mascot: MyString
+  home_bg_color: MyString
+  home_font_color: MyString
+  home_score: MyString
+  away_team: MyString
+  away_mascot: MyString
+  away_bg_color: MyString
+  away_font_color: MyString
+  away_score: MyString
+  inning: 1
+  inning_status: MyString
+  outs: 1
+  pitch_count: 1
+  foul_balls: 1
+  runner_on_first: false
+  runner_on_second: false
+  runner_on_third: false

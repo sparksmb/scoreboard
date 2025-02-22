@@ -14,6 +14,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "redis", ">= 4.0.1"
 gem 'haml-rails'
+gem "awesome_print"
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
 

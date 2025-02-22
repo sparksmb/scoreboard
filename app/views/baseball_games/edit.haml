@@ -1,0 +1,20 @@
+%h1 Edit Score
+
+= form_with(model: @game, local: true) do |f|
+  %p
+    %label Home Score:
+    = f.number_field :home_score
+
+  %p
+    %label Away Score:
+    = f.number_field :away_score
+
+  %p
+    %label Inning:
+    = f.number_field :inning
+
+  %p
+    %label Outs:
+    = f.number_field :outs
+
+  = f.submit "Update Score"

@@ -1,0 +1,9 @@
+rails g model Game home_team:string home_mascot:string home_bg_color home_font_color home_score away_team:string away_mascot:string away_bg_color away_font_color away_score 
+rails db:migrate
+
+rails g controller Games show edit update scoreboard --skip-template-engine
+
+# Baseball
+rails g controller BaseballGames show edit update scoreboard --skip-template-engine
+rails g model BaseballGame home_team:string home_mascot:string home_bg_color home_font_color home_score away_team:string away_mascot:string away_bg_color away_font_color away_score inning:integer inning_status:string outs:integer pitch_count:integer foul_balls:integer runner_on_first:boolean runner_on_second:boolean runner_on_third:boolean
+rails db:migrate
