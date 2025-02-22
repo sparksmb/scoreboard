@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_22_165519) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_22_220414) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_22_165519) do
     t.boolean "runner_on_third"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "balls", default: 0
+    t.integer "strikes", default: 0
   end
 
   create_table "games", force: :cascade do |t|
