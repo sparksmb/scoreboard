@@ -9,3 +9,19 @@ heroku addons:create heroku-postgresql:essential-0 --app fhs-scoreboard-dev
 
 # Provision Redis for Pub/Sub Broadcast Channel
 heroku addons:create heroku-redis --app fhs-scoreboard-dev
+heroku redis:credentials --app fhs-scoreboard-dev
+# e.g. heroku config:set REDIS_URL="redis://h:password@ec2-XX-XX-XX-XX.compute-1.amazonaws.com:12345" --app fhs-scoreboard-dev
+heroku restart --app fhs-scoreboard-dev
+
+# Test out Redis from a console
+heroku run rails console --app fhs-scoreboard-dev
+redis = Redis.new(url: ENV['REDIS_URL'], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
+redis.ping
+
+
+# For troubleshooting view logs in development environment
+heroku logs --tail -a fhs-scoreboard-dev
+
+# Restarting the app
+heroku restart --app fhs-scoreboard-dev
+heroku redis:restart --app fhs-scoreboard-dev

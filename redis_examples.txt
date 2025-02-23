@@ -1,0 +1,59 @@
+# Connect to Redis from a Rails Console
+redis = Redis.new(url: ENV['REDIS_URL'], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
+redis.ping
+# => "PONG"
+
+redis = Redis.new
+redis.set("game_status", "Inning 5")
+puts redis.get("game_status")
+
+redis.hset("baseball_game", "home_team", "Dodgers")
+puts redis.hget("baseball_game", "home_team")
+
+redis = Redis.new
+data = JSON.parse(redis.get("baseball_game:1"))
+puts data["score"]["home"]  # Output: 3
+
+
+# Connect to Redis directly using the `redis-cli`
+
+  # Connect to redis on local machine
+  redis-cli
+
+  # Connect to the heroku development environment redis
+  heroku redis:cli -a fhs-scoreboard-dev
+
+# Redis Commands
+keys *
+
+SET my_key "Hello, Redis!"
+get my_key
+
+HSET baseball_game home_team "Yankees" away_team "Red Sox" home_score "3" away_score "2"
+HGETALL baseball_game:1
+HSET baseball_game:1 home_team "Yankees" away_team "Red Sox" home_score "3" away_score "2" inning "5"
+HGETALL baseball_game:1
+HGET baseball_game:1 home_score
+HGETALL baseball_game
+HGET baseball_game home_score
+
+SET baseball_game:1 '{
+  "home_team": "Yankees",
+  "away_team": "Red Sox",
+  "score": { "home": 3, "away": 2 },
+  "inning": 5
+}'
+
+JSON.GET baseball_game:1 $.score
+
+LPUSH game_updates "Yankees scored 1 run"
+LPUSH game_updates "Red Sox hit a double"
+LPOP game_updates
+
+DEL my_key
+# Clear all keys ***********(be careful!)*************
+FLUSHALL
+
+# Exit Redis Prompt
+exit
+# or CTRL + c
