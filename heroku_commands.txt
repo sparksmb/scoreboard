@@ -1,0 +1,11 @@
+# Setup a development environment
+
+# Create the web app
+heroku apps:create fhs-scoreboard-dev
+
+# Provision a database
+heroku addons:create heroku-postgresql:mini --app fhs-scoreboard-dev
+heroku addons:create heroku-postgresql:essential-0 --app fhs-scoreboard-dev
+
+# Provision Redis for Pub/Sub Broadcast Channel
+heroku addons:create heroku-redis --app fhs-scoreboard-dev

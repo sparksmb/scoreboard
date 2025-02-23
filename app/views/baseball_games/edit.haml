@@ -14,6 +14,10 @@
     = f.number_field :inning
 
   %p
+    %label Inning Status:
+    = f.select :inning_status, options_for_select([["Top", "top"], ["Bottom", "bottom"], ["End", "end"]]), {}, class: "form-control"
+
+  %p
     %label Balls:
     = f.number_field :balls
 

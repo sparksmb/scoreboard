@@ -33,6 +33,7 @@ class BaseballGamesController < ApplicationController
       :home_score,
       :away_score,
       :inning,
+      :inning_status,
       :balls,
       :strikes,
       :outs
