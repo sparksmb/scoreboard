@@ -1,8 +1,21 @@
 #scoreboard
-  %h1= game.home_team
-  %h2 Home Score: #{game.home_score}
-
-  %h1= game.away_team
-  %h2 Away Score: #{game.away_score}
-
-  %h3 Inning: #{game.inning} #{game.inning_status}, Balls: #{game.balls}, Strikes: #{game.strikes}, Outs: #{game.outs}
+  %table.scoreboard-table
+    %tr
+      %td.home-team= game.home_team.upcase
+      %td.home-score= game.home_score
+      %td.inning-info
+        %span.inning-status
+          - status = case game.inning_status
+          - when "top" then "▲"
+          - when "bot" then "▼"
+          - else "end"
+          #{status}
+        %span.inning
+          #{game.inning}
+        %div.balls-strikes-outs
+          %span.balls-strikes
+            #{game.balls}-#{game.strikes}
+          %span.outs
+            outs #{game.outs}
+      %td.away-team= game.away_team.upcase
+      %td.away-score= game.away_score
