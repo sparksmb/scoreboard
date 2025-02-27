@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_22_220414) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_26_021415) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,12 +19,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_22_220414) do
     t.string "home_mascot"
     t.string "home_bg_color"
     t.string "home_font_color"
-    t.string "home_score"
+    t.integer "home_score", default: 0
     t.string "away_team"
     t.string "away_mascot"
     t.string "away_bg_color"
     t.string "away_font_color"
-    t.string "away_score"
+    t.integer "away_score", default: 0
     t.integer "inning"
     t.string "inning_status"
     t.integer "outs"

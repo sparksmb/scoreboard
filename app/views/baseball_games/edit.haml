@@ -1,32 +1,45 @@
-%h1 Edit Score
+%h1.title Edit Score
 
-= form_with(model: @game, url: baseball_game_path(@game), data: { turbo: false }) do |f|
-  %p
-    %label Home Score:
-    = f.number_field :home_score
+= form_with(id: "score-form", model: @game, url: baseball_game_path(@game), data: { turbo: false}) do |f|
+  = f.hidden_field :home_run, id: "home-run-input"
 
-  %p
-    %label Away Score:
-    = f.number_field :away_score
+  %dl
+    %div.form-row
+      %dt Home Score:
+      %dd
+        = f.number_field :home_score
+        = link_to "HOME RUN", "#", class: 'button home-run-btn', data: { team: "home", turbo: false }
+        = link_to "TRIPLE",   "#", class: 'button'
+        = link_to "DOUBLE",   "#", class: 'button'
+        = link_to "SINGLE",   "#", class: 'button'
 
-  %p
-    %label Inning:
-    = f.number_field :inning
+    %div.form-row
+      %dt Away Score:
+      %dd
+        = f.number_field :away_score
+        = link_to "HOME RUN", "#", class: 'button button-red'
+        = link_to "TRIPLE",   "#", class: 'button button-red'
+        = link_to "DOUBLE",   "#", class: 'button button-red'
+        = link_to "SINGLE",   "#", class: 'button button-red'
 
-  %p
-    %label Inning Status:
-    = f.select :inning_status, options_for_select([["Top", "top"], ["Bottom", "bottom"], ["End", "end"]]), {}, class: "form-control"
+    %div.form-row
+      %dt Inning:
+      %dd= f.number_field :inning
 
-  %p
-    %label Balls:
-    = f.number_field :balls
+    %div.form-row
+      %dt Inning Status:
+      %dd= f.select :inning_status, options_for_select([["Top", "top"], ["Bottom", "bot"], ["End", "end"]], @game.inning_status), {}, class: "form-control"
 
-  %p
-    %label Strikes:
-    = f.number_field :strikes
+    %div.form-row
+      %dt Balls:
+      %dd= f.number_field :balls
 
-  %p
-    %label Outs:
-    = f.number_field :outs
+    %div.form-row
+      %dt Strikes:
+      %dd= f.number_field :strikes
+
+    %div.form-row
+      %dt Outs:
+      %dd= f.number_field :outs
 
   = f.submit "Update Score"

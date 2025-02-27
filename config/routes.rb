@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   root "baseball_games#scoreboard"
 
-  resources :baseball_games, only: [ :show, :edit, :update ]
+  resources :baseball_games, only: [ :show, :edit, :update ] do
+    member do
+      patch :home_team_home_run
+    end
+  end
   get "/scoreboard", to: "baseball_games#scoreboard"
 end

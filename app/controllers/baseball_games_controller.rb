@@ -1,5 +1,9 @@
 class BaseballGamesController < ApplicationController
-  before_action :set_game, only: [ :show, :edit, :update ]
+  before_action :set_game, only: [
+    :show,
+    :edit,
+    :update
+  ]
 
   def show
     render :scoreboard
@@ -9,8 +13,19 @@ class BaseballGamesController < ApplicationController
   end
 
   def update
-    if @game.update(game_params)
-      redirect_to edit_baseball_game_path(@game), notice: "Score updated!"
+    ap update_params = game_params.to_h
+
+    case
+    when homerun?
+      ap new_score = @game.compute_score_from_home_run(team: "home")
+      update_params["home_score"] = new_score
+    end
+
+    ap "======================== AFTER LOGIC ================================"
+    ap update_params
+
+    if @game.update!(update_params)
+      redirect_to edit_baseball_game_path(@game)
     else
       flash[:alert] = "Error updating score."
       redirect_to edit_baseball_game_path(@game)
@@ -36,7 +51,12 @@ class BaseballGamesController < ApplicationController
       :inning_status,
       :balls,
       :strikes,
-      :outs
+      :outs,
+      :home_run
     )
+  end
+
+  def homerun?
+    params[:baseball_game][:home_run].present?
   end
 end

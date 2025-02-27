@@ -1,0 +1,10 @@
+
+    = link_to "HOMERUN",  "#", class: 'button'
+
+    respond_to do |format|
+      format.html {
+      }
+      format.json { render json: { home_score: @game.home_score } }
+    end
+
+    = link_to "HOMERUN", home_team_home_run_baseball_game_path(@game), method: :patch, data: { turbo_method: :patch }, class: 'button'
