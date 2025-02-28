@@ -17,5 +17,11 @@
             #{game.balls}-#{game.strikes}
           %span.outs
             outs #{game.outs}
+        %img.base_runners{
+          src: "data:image/svg+xml;utf8,#{game.base_runners_svg}",
+          width: "50px",
+          style: "padding-left: 10px;" }
+        -#base_runners_svg @game.base_runners_svg
+        -#%img{src: "data:image/svg+xml;utf8,#{base_runners_svg}" }
       %td.away-team= game.away_team.upcase
       %td.away-score= game.away_score

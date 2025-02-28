@@ -1,26 +1,22 @@
 %h1.title Edit Score
 
 = form_with(id: "score-form", model: @game, url: baseball_game_path(@game), data: { turbo: false}) do |f|
-  = f.hidden_field :home_run, id: "home-run-input"
+  = f.hidden_field :action, id: "action-input"
 
   %dl
     %div.form-row
       %dt Home Score:
       %dd
         = f.number_field :home_score
-        = link_to "HOME RUN", "#", class: 'button home-run-btn', data: { team: "home", turbo: false }
-        = link_to "TRIPLE",   "#", class: 'button'
-        = link_to "DOUBLE",   "#", class: 'button'
-        = link_to "SINGLE",   "#", class: 'button'
+        = link_to "HOME RUN", "#", class: 'button action-btn', data: { action: "homerun", turbo: false }
 
     %div.form-row
       %dt Away Score:
       %dd
         = f.number_field :away_score
-        = link_to "HOME RUN", "#", class: 'button button-red'
-        = link_to "TRIPLE",   "#", class: 'button button-red'
-        = link_to "DOUBLE",   "#", class: 'button button-red'
-        = link_to "SINGLE",   "#", class: 'button button-red'
+        = link_to "1st Base", "#", class: 'button action-btn', data: { action: "toggle_first", turbo: false }
+        = link_to "2nd Base", "#", class: 'button action-btn', data: { action: "toggle_second", turbo: false }
+        = link_to "3rd Base", "#", class: 'button action-btn', data: { action: "toggle_third", turbo: false }
 
     %div.form-row
       %dt Inning:
@@ -32,14 +28,23 @@
 
     %div.form-row
       %dt Balls:
-      %dd= f.number_field :balls
+      %dd
+        = f.number_field :balls
+        = link_to "BALL", "#", class: 'button action-btn', data: { action: "ball", turbo: false }
 
     %div.form-row
       %dt Strikes:
-      %dd= f.number_field :strikes
+      %dd
+        = f.number_field :strikes
+        = link_to "STRIKE", "#", class: 'button action-btn', data: { action: "strike", turbo: false }
 
     %div.form-row
       %dt Outs:
-      %dd= f.number_field :outs
+      %dd
+        = f.number_field :outs
+        = link_to "OUT", "#", class: 'button action-btn', data: { action: "out", turbo: false }
 
-  = f.submit "Update Score"
+    %div.form-row
+      %dt Last Action:
+      %dd= @game.action
+  = f.submit "Update Score", class: 'button'

@@ -270,6 +270,8 @@ GEM
       rubocop-rails
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
+    sass-rails (6.0.0)
+      sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -348,7 +350,7 @@ DEPENDENCIES
   rails (~> 7.2.2, >= 7.2.2.1)
   redis (>= 4.0.1)
   rubocop-rails-omakase
-  sassc-rails
+  sass-rails
   selenium-webdriver
   sprockets-rails
   stimulus-rails
