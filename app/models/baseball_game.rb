@@ -24,6 +24,22 @@ class BaseballGame < ApplicationRecord
     count
   end
 
+  def next_strike_count
+    count = strikes + 1
+    if strikes >= 2
+      count = 0
+    end
+    count
+  end
+
+  def next_out_count
+    count = outs + 1
+    if outs >= 2
+      count = 0
+    end
+    count
+  end
+
   def batting_team
     case inning_status
     when "top" then "away"

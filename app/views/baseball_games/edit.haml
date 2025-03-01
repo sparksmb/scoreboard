@@ -31,25 +31,23 @@
     %div.form-row
       %dt Balls:
       %dd
-        = f.number_field :balls
+        = f.number_field :balls, max: 3, min: 0
         = link_to "BALL", "#", class: 'button action-btn', data: { action: "ball", turbo: false }
         -#= link_to "WALK", "#", class: 'button action-btn', data: { action: "walk", turbo: false }
 
     %div.form-row
       %dt Strikes:
       %dd
-        = f.number_field :strikes
+        = f.number_field :strikes, max: 2, min: 0
         = link_to "STRIKE", "#", class: 'button action-btn', data: { action: "strike", turbo: false }
+        = link_to "CLEAR COUNT", "#", class: 'button action-btn', data: { action: "clear_count", turbo: false }
 
     %div.form-row
       %dt Outs:
       %dd
-        = f.number_field :outs
+        = f.number_field :outs, max: 2, min: 0
         = link_to "OUT", "#", class: 'button action-btn', data: { action: "out", turbo: false }
-
-    %div.form-row
-      %dt Last Action:
-      %dd= @game.action
+        = link_to "CLEAR ALL", "#", class: 'button action-btn', data: { action: "clear_all_counts", turbo: false }
 
     %div.form-row
       %dt Base Runners:

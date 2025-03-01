@@ -13,7 +13,7 @@ class BaseballGamesController < ApplicationController
   end
 
   def update
-    ap game_params
+    # ap game_params
     ap update_params = game_params.to_h
 
     ap "===== ACTION: #{update_params[:action]} =============================="
@@ -25,8 +25,18 @@ class BaseballGamesController < ApplicationController
       update_params["runner_on_second"] = false
       update_params["runner_on_third"] = false
     when ball?
-      count = @game.next_ball_count
-      update_params["balls"] = count
+      update_params["balls"] = @game.next_ball_count
+    when strike?
+      update_params["strikes"] = @game.next_strike_count
+    when out?
+      update_params["outs"] = @game.next_out_count
+    when clear_count?
+      update_params["balls"] = 0
+      update_params["strikes"]  = 0
+    when clear_all_counts?
+      update_params["balls"] = 0
+      update_params["strikes"]  = 0
+      update_params["outs"]  = 0
     when walk?
       update_params["balls"] = 0
       update_params = @game.compute_walk(update_params)
@@ -35,6 +45,8 @@ class BaseballGamesController < ApplicationController
     when inc_away_score?
       update_params["away_score"] = @game.away_score + 1
     end
+
+    ap update_params
 
     if @game.update!(update_params)
       redirect_to edit_baseball_game_path(@game)
@@ -77,6 +89,22 @@ class BaseballGamesController < ApplicationController
 
   def ball?
     game_params[:action] == "ball"
+  end
+
+  def strike?
+    game_params[:action] == "strike"
+  end
+
+  def out?
+    game_params[:action] == "out"
+  end
+
+  def clear_count?
+    game_params[:action] == "clear_count"
+  end
+
+  def clear_all_counts?
+    game_params[:action] == "clear_all_counts"
   end
 
   def walk?
