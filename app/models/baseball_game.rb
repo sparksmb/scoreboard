@@ -9,7 +9,7 @@ class BaseballGame < ApplicationRecord
     })
   end
 
-  def compute_score_from_home_run
+  def compute_score_from_homerun
     team = batting_team
     current_score = team == "home" ? home_score : away_score
     runners_scored = base_runner_count
@@ -48,9 +48,9 @@ class BaseballGame < ApplicationRecord
   end
 
   def base_runners_svg
-    first  = runner_on_first  ? "black" : "none"
-    second = runner_on_second ? "black" : "none"
-    third  = runner_on_third  ? "black" : "none"
+    first  = runner_on_first  == true ? "black" : "none"
+    second = runner_on_second == true ? "black" : "none"
+    third  = runner_on_third  == true ? "black" : "none"
     svg = <<~SVG
       <svg width="300" height="200" viewBox="0 55 100 150" xmlns="http://www.w3.org/2000/svg">
         <g transform="translate(100,100)">
@@ -69,4 +69,50 @@ class BaseballGame < ApplicationRecord
        .gsub("#", "%23")
   end
 
+  def compute_walk(update_params)
+    # 000 = no runners on base
+    # 111 = bases loaded
+    # index 0 is 3rd base
+    # index 1 is 2nd base
+    # index 2 is 1st base
+    # runners = "000"
+    # runners[2] = true if update_params["runner_on_first"]
+    # runners[1] = true if update_params["runner_on_second"]
+    # runners[0] = true if update_params["runner_on_third"]
+    # ap "Runners initialized"
+    # ap runners
+
+    # case runners
+    # when "000" then "001"
+    # when "001" then "011"
+    # when "010" then "011"
+    # when "011" then "111"
+    # when "100" then "101"
+    # when "101" then "111"
+    # when "110" then "111"
+    # when "111"
+    #   update_params = compute_runs(1, update_params)
+    #   "110"
+    # end
+
+    # ap "Runners moved"
+    # ap runners
+
+    # update_params["runner_on_first"]  = runners[2] ? true : false
+    # update_params["runner_on_second"] = runners[1] ? true : false
+    # update_params["runner_on_third"]  = runners[0] ? true : false
+
+    update_params["runner_on_first"] = true
+    ap "COMPUTE WALK>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    ap update_params
+
+    update_params
+  end
+
+  def compute_runs(runs, update_params)
+    key = "#{batting_team}_score"
+    current_score = self[key]
+    new_score = current_score + runs
+    update_params[key] = new_score
+  end
 end

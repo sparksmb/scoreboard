@@ -8,15 +8,17 @@
       %dt Home Score:
       %dd
         = f.number_field :home_score
-        = link_to "HOME RUN", "#", class: 'button action-btn', data: { action: "homerun", turbo: false }
+        = link_to "+1", "#", class: 'button action-btn', data: { action: "inc_home_score", turbo: false }
+        = link_to "HOMERUN", "#", class: 'button action-btn', data: { action: "homerun", turbo: false }
 
     %div.form-row
       %dt Away Score:
       %dd
         = f.number_field :away_score
-        = link_to "1st Base", "#", class: 'button action-btn', data: { action: "toggle_first", turbo: false }
-        = link_to "2nd Base", "#", class: 'button action-btn', data: { action: "toggle_second", turbo: false }
-        = link_to "3rd Base", "#", class: 'button action-btn', data: { action: "toggle_third", turbo: false }
+        = link_to "+1", "#", class: 'button action-btn', data: { action: "inc_away_score", turbo: false }
+        -# = link_to "1st Base", "#", class: 'button action-btn', data: { action: "toggle_first", turbo: false }
+        -# = link_to "2nd Base", "#", class: 'button action-btn', data: { action: "toggle_second", turbo: false }
+        -# = link_to "3rd Base", "#", class: 'button action-btn', data: { action: "toggle_third", turbo: false }
 
     %div.form-row
       %dt Inning:
@@ -31,6 +33,7 @@
       %dd
         = f.number_field :balls
         = link_to "BALL", "#", class: 'button action-btn', data: { action: "ball", turbo: false }
+        -#= link_to "WALK", "#", class: 'button action-btn', data: { action: "walk", turbo: false }
 
     %div.form-row
       %dt Strikes:
@@ -47,4 +50,16 @@
     %div.form-row
       %dt Last Action:
       %dd= @game.action
-  = f.submit "Update Score", class: 'button'
+
+    %div.form-row
+      %dt Base Runners:
+      %dd
+        = f.check_box :runner_on_first
+        = f.label :runner_on_first, "1st"
+        %br
+        = f.check_box :runner_on_second
+        = f.label :runner_on_first, "2nd"
+        %br
+        = f.check_box :runner_on_third
+        = f.label :runner_on_first, "3rd"
+  = f.submit "Update Scoreboard", class: 'button'
