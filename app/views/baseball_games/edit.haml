@@ -26,7 +26,7 @@
 
     %div.form-row
       %dt Inning Status:
-      %dd= f.select :inning_status, options_for_select([["Top", "top"], ["Bottom", "bot"], ["End", "end"]], @game.inning_status), {}, class: "form-control"
+      %dd= f.select :inning_status, options_for_select([["Pre", "pre"], ["Top", "top"], ["Bottom", "bot"], ["End", "end"]], @game.inning_status), {}, class: "form-control"
 
     %div.form-row
       %dt Balls:

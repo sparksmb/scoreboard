@@ -8,6 +8,10 @@ class BaseballGame < ApplicationRecord
 
   after_update_commit -> { broadcast_update }
 
+  def pregame?
+    inning_status == "pre"
+  end
+
   def compute_action(action, params)
     raise ArgumentError, "Invalid action: #{action}" unless VALID_ACTIONS.include?(action)
     send("compute_#{action}", params)

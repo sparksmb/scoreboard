@@ -1,17 +1,19 @@
 #scoreboard
   %table.scoreboard-table
     %tr
-      %td.home-team= game.home_team.upcase
-      %td.home-score= game.home_score
+      %td.away-team= game.away_team.upcase
+      %td.away-score= game.away_score
       %td.inning-info
         %span.inning-status
           - status = case game.inning_status
           - when "top" then "▲"
           - when "bot" then "▼"
-          - else "end"
+          - when "pre" then "Pre"
+          - when "end" then "Final"
           #{status}
         %span.inning
-          #{game.inning}
+          - unless game.pregame? || game.inning_status == "end"
+            #{game.inning}
         %div.balls-strikes-outs
           %span.balls-strikes
             #{game.balls}-#{game.strikes}
@@ -21,7 +23,5 @@
           src: "data:image/svg+xml;utf8,#{game.base_runners_svg}",
           width: "50px",
           style: "padding-left: 10px;" }
-        -#base_runners_svg @game.base_runners_svg
-        -#%img{src: "data:image/svg+xml;utf8,#{base_runners_svg}" }
-      %td.away-team= game.away_team.upcase
-      %td.away-score= game.away_score
+      %td.home-team= game.home_team.upcase
+      %td.home-score= game.home_score
