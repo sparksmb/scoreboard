@@ -1,7 +1,64 @@
 class BaseballGame < ApplicationRecord
   attr_accessor :action
 
+  VALID_ACTIONS = %w[homerun ball strike out clear_count clear_all_counts walk inc_home_score inc_away_score].freeze
+
+  validates :home_team, presence: true
+  validates :away_team, presence: true
+
   after_update_commit -> { broadcast_update }
+
+  def compute_action(action, params)
+    raise ArgumentError, "Invalid action: #{action}" unless VALID_ACTIONS.include?(action)
+    send("compute_#{action}", params)
+  end
+
+  def compute_homerun(params)
+    new_score = compute_score_from_homerun
+    params["#{batting_team}_score"] = new_score
+    params["runner_on_first"] = false
+    params["runner_on_second"] = false
+    params["runner_on_third"] = false
+    params
+  end
+
+  def compute_ball(params)
+    params["balls"] = next_ball_count
+    params
+  end
+
+  def compute_strike(params)
+    params["strikes"] = next_strike_count
+    params
+  end
+
+  def compute_out(params)
+    params["outs"] = next_out_count
+    params
+  end
+
+  def compute_clear_count(params)
+    params["balls"] = 0
+    params["strikes"] = 0
+    params
+  end
+
+  def compute_clear_all_counts(params)
+    params["balls"] = 0
+    params["strikes"] = 0
+    params["outs"] = 0
+    params
+  end
+
+  def compute_inc_home_score(params)
+    params["home_score"] = home_score + 1
+    params
+  end
+
+  def compute_inc_away_score(params)
+    params["away_score"] = away_score + 1
+    params
+  end
 
   def broadcast_update
     BaseballGameChannel.broadcast_to("baseball_game", {
