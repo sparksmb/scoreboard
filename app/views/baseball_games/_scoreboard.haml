@@ -2,7 +2,7 @@
   %table.scoreboard-table
     %tr
       %td.away-team= game.away_team.upcase
-      %td.away-score= game.away_score
+      %td.away-score= game.home_score
       %td.inning-info
         %span.inning-status
           - status = case game.inning_status
@@ -24,4 +24,4 @@
           width: "50px",
           style: "padding-left: 10px;" }
       %td.home-team= game.home_team.upcase
-      %td.home-score= game.home_score
+      %td.home-score= game.away_score
