@@ -26,7 +26,7 @@ Rails.application.configure do
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
 
-  config.assets.compile = true
+  config.assets.compile = false
   config.assets.digest = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.

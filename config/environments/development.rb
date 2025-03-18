@@ -65,10 +65,10 @@ Rails.application.configure do
   config.assets.quiet = true
 
   # Enable automatic asset compilation
-  config.assets.debug = true
   config.assets.compile = true
-  config.assets.digest = false
-  config.assets.check_precompiled_asset = false
+  config.assets.debug = true
+  config.assets.digest = true
+  config.assets.check_precompiled_asset = true
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
