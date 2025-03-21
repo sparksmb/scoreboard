@@ -1,7 +1,19 @@
 class BaseballGame < ApplicationRecord
   attr_accessor :action
 
-  VALID_ACTIONS = %w[homerun ball strike out clear_count clear_all_counts walk inc_home_score inc_away_score].freeze
+  VALID_ACTIONS = %w[
+    homerun
+    ball
+    strike
+    out
+    clear_count
+    clear_all_counts
+    walk
+    inc_home_score
+    inc_away_score
+    next_inning_status
+    clear_out
+  ].freeze
 
   validates :home_team, presence: true
   validates :away_team, presence: true
@@ -15,6 +27,26 @@ class BaseballGame < ApplicationRecord
   def compute_action(action, params)
     raise ArgumentError, "Invalid action: #{action}" unless VALID_ACTIONS.include?(action)
     send("compute_#{action}", params)
+  end
+
+  def compute_next_inning_status(params)
+    params = compute_clear_all_counts(params)
+    case params["inning_status"]
+    when "pre"
+      params["inning_status"] = "top"
+      params["inning"] = 1
+    when "top"
+      params["inning_status"] = "bot"
+    when "bot"
+      params["inning_status"] = "top"
+      params["inning"] = params["inning"].to_i + 1
+    when "end"
+      params["inning_status"] = "pre"
+      params["inning"] = 1
+      params["home_score"] = 0
+      params["away_score"] = 0
+    end
+    params
   end
 
   def compute_homerun(params)
@@ -47,11 +79,24 @@ class BaseballGame < ApplicationRecord
     params
   end
 
+  def compute_clear_out(params)
+    params = compute_clear_count(params)
+    params = compute_out(params)
+    params
+  end
+
+  def clear_baserunners(params)
+    params["runner_on_first"] = false
+    params["runner_on_second"] = false
+    params["runner_on_third"] = false
+    params
+  end
+
   def compute_clear_all_counts(params)
     params["balls"] = 0
     params["strikes"] = 0
     params["outs"] = 0
-    params
+    clear_baserunners(params)
   end
 
   def compute_inc_home_score(params)

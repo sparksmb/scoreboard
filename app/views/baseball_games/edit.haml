@@ -5,20 +5,16 @@
 
   %dl
     %div.form-row
-      %dt Home Score:
+      %dt #{@game.home_team}:
       %dd
         = f.number_field :home_score
         = link_to "+1", "#", class: 'button action-btn', data: { action: "inc_home_score", turbo: false }
-        = link_to "HOMERUN", "#", class: 'button action-btn', data: { action: "homerun", turbo: false }
 
     %div.form-row
-      %dt Away Score:
+      %dt #{@game.away_team}:
       %dd
         = f.number_field :away_score
         = link_to "+1", "#", class: 'button action-btn', data: { action: "inc_away_score", turbo: false }
-        -# = link_to "1st Base", "#", class: 'button action-btn', data: { action: "toggle_first", turbo: false }
-        -# = link_to "2nd Base", "#", class: 'button action-btn', data: { action: "toggle_second", turbo: false }
-        -# = link_to "3rd Base", "#", class: 'button action-btn', data: { action: "toggle_third", turbo: false }
 
     %div.form-row
       %dt Inning:
@@ -26,7 +22,10 @@
 
     %div.form-row
       %dt Inning Status:
-      %dd= f.select :inning_status, options_for_select([["Pre", "pre"], ["Top", "top"], ["Bottom", "bot"], ["End", "end"]], @game.inning_status), {}, class: "form-control"
+      %dd
+        = f.select :inning_status, options_for_select([["Pre", "pre"], ["Top", "top"], ["Bottom", "bot"], ["End", "end"]], @game.inning_status), {}, class: "form-control"
+        = link_to "NEXT IN.", "#", class: 'button action-btn', data: { action: "next_inning_status", turbo: false }
+
 
     %div.form-row
       %dt Balls:
@@ -40,6 +39,8 @@
       %dd
         = f.number_field :strikes, max: 2, min: 0
         = link_to "STRIKE", "#", class: 'button action-btn', data: { action: "strike", turbo: false }
+        %br
+        %br
         = link_to "CLEAR COUNT", "#", class: 'button action-btn', data: { action: "clear_count", turbo: false }
 
     %div.form-row
@@ -47,7 +48,9 @@
       %dd
         = f.number_field :outs, max: 2, min: 0
         = link_to "OUT", "#", class: 'button action-btn', data: { action: "out", turbo: false }
-        = link_to "CLEAR ALL", "#", class: 'button action-btn', data: { action: "clear_all_counts", turbo: false }
+        %br
+        %br
+        = link_to "CLEAR OUT", "#", class: 'button action-btn', data: { action: "clear_out", turbo: false }
 
     %div.form-row
       %dt Base Runners:
@@ -60,4 +63,7 @@
         %br
         = f.check_box :runner_on_third
         = f.label :runner_on_first, "3rd"
+        %br
+        %br
+        = link_to "CLEAR ALL", "#", class: 'button action-btn', data: { action: "clear_all_counts", turbo: false }
   = f.submit "Update Scoreboard", class: 'button'
