@@ -1,8 +1,11 @@
 #scoreboard
   %table.scoreboard-table
     %tr
-      %td{ style: "width: 60px; font-weight: bold; text-align: center; background-color: #0A3300; color: #f8cc3f;" }= game.away_score
-      %td{ style: "min-width: 270px; font-weight: bold; padding-left: 20px; background-color: #3d662b; color: #f8cc3f;" }= game.away_team.upcase
+      - abgc  = game.away_bg_color
+      - abgsc = game.away_bg_score_color
+      - afc   = game.away_font_color
+      %td.away-score{ style: "width: 60px; font-weight: bold; text-align: center; background-color: #{abgsc}; color: #{afc};" }= game.away_score
+      %td{ style: "min-width: 270px; font-weight: bold; padding-left: 20px; background-color: #{abgc}; color: #{afc};" }= game.away_team.upcase
       %td.inning-info
         %span.inning-status
           - status = case game.inning_status
@@ -23,5 +26,8 @@
           src: "data:image/svg+xml;utf8,#{game.base_runners_svg}",
           width: "50px",
           style: "padding-left: 10px;" }
-      %td{ style: "min-width: 270px; font-weight: bold; padding-left: 20px; background-color: gold; color: black;" }= game.home_team.upcase
-      %td{ style: "width: 60px; font-weight: bold; text-align: center; background-color: #ccac00; color: black;" }= game.home_score
+      - hbgc  = game.home_bg_color
+      - hbgsc = game.home_bg_score_color
+      - hfc   = game.home_font_color
+      %td{ style: "min-width: 270px; font-weight: bold; padding-left: 20px; background-color: #{hbgc}; color: #{hfc};" }= game.home_team.upcase
+      %td{ style: "width: 60px; font-weight: bold; text-align: center; background-color: #{hbgsc}; color: #{hfc};" }= game.home_score
