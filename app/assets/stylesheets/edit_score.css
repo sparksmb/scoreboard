@@ -1,3 +1,7 @@
+html, body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .title {
   font-family: Helvetica, sans-serif;
 }
@@ -42,16 +46,22 @@ dd input, dd select {
 }
 
 .button-red {
-  --btn-bg: #dc3545;  /* Red */
-  --btn-hover: #a71d2a; /* Darker Red */
+  background-color: #dc3545;  /* Red */
+}
+.button-red:hover {
+  background-color: #a71d2a; /* Darker Red */
 }
 
 .button-green {
-  --btn-bg: #28a745;  /* Green */
-  --btn-hover: #1e7e34; /* Darker Green */
+  background-color: #28a745;  /* Green */
+}
+.button-green:hover {
+  background-color: #1e7e34; /* Darker Green */
 }
 
 .button-yellow {
-  --btn-bg: #ffc107;  /* Yellow */
-  --btn-hover: #e0a800; /* Darker Yellow */
+  background-color: #ffc107;  /* Yellow */
+}
+.button-yellow:hover {
+  background-color: #e0a800; /* Darker Yellow */
 }

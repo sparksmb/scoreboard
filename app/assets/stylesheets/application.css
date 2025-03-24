@@ -1,0 +1,62 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * in this directory and subdirectories. The order matters.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html, body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.scoreboard-table {
+  border-collapse: collapse;
+  font-family: Helvetica, sans-serif;
+  table-layout: fixed;
+  font-size: 30px;
+}
+
+.scoreboard-table .inning-info {
+  background-color: white;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.scoreboard-table .inning-info .inning-status {
+  font-size: 15px;
+}
+
+.scoreboard-table .inning-info .inning {
+  padding-right: 10px;
+}
+
+.scoreboard-table .inning-info {
+  padding-left: 10px;
+}
+
+.scoreboard-table .balls-strikes-outs {
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scoreboard-table td {
+  border: none;
+}
+
+.away-score, .home-score {
+  width: 60px;
+  font-weight: bold;
+  text-align: center; 
+}
+
+.away-team, .home-team {
+  min-width: 200px;
+  font-weight: bold;
+  padding-left: 20px; 
+}

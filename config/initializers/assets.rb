@@ -12,6 +12,6 @@ Rails.application.config.assets.version = "1.0"
 # Rails.application.config.assets.precompile += %w[ admin.js admin.css ]
 
 # sass-rails config
-Rails.application.config.sass.preferred_syntax = :scss
-Rails.application.config.sass.line_comments = false
-Rails.application.config.sass.cache = false
+# Rails.application.config.sass.preferred_syntax = :scss
+# Rails.application.config.sass.line_comments = false
+# Rails.application.config.sass.cache = false

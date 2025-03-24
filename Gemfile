@@ -17,7 +17,6 @@ gem "jbuilder"
 gem "redis", ">= 4.0.1"
 gem 'haml-rails'
 gem "awesome_print"
-gem "sass-rails"
 # gem "kredis"
 # gem "bcrypt", "~> 3.1.7"
 
@@ -38,7 +37,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem 'rspec-rails', '~> 6.1.0'
   gem 'factory_bot_rails'
-  gem "database_cleaner-active_record"
 end
 
 group :development do
